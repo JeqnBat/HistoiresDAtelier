@@ -3,76 +3,112 @@ const template = document.createElement('template')
 template.innerHTML = `
   <style>
 /* CSS ____________________________________________________ */
+  :host {
+    font-size: 1.5rem;
+  }
   #hamburger {
     position: relative;
-    z-index: 2;
     cursor: pointer;
-    transition: all .2s ease-in-out;
-  }
-  #hamburger > div {
-    background: black;
     transition: all .2s ease-in-out;
   }
   .rectangle {
-    width: 36px;
-    height: 5px;
-    margin: 4px;
-    border-radius: 5px;
+    width: 30px;
+    height: 3px;
+    margin: 5px;
+    background: black;
   }
-  .line-1 {
-    transform: rotateZ(45deg) translateY(12px);
-    background: white!important;
-  }
-  .line-2 {
-    opacity: 0;
-  }
-  .line-3 {
-    transform: rotateZ(-45deg) translateY(-12px);
-    background: white!important;
-  }
-  .move-right {
-    transform: translateX(4px);
-  }
-  #menu {
-    position: absolute;
-    z-index: 1;
-    top: 10vh;
-    right: 2vw;
-    left: 2vw;
+  #nav-bar {
     cursor: pointer;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: -100vw;
     display: flex;
-    flex-direction: column;
     text-transform: uppercase;
-    font-size: 3rem;
     background: white;
-    transform: translateX(100vw);
-    transition: transform .3s ease-in-out .1s;
+    position: fixed;
+    z-index: 1;
+    transition: left .2s ease-in-out .1s;
   }
-  #menu > div {
-    padding: 20px;
-    border-bottom: 1px solid whitesmoke;
+  .active {
+    left: 0!important;
   }
-  .slide-left {
-    transform: translateX(0)!important;
+  .left {
+    color: white;
+    background: darkred;
+    width: 32vw;
   }
+  .left > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh 0;
+    border-bottom: 1px solid white;
+  }
+  .spacer {
+    width: 6vw;
+  }
+  .middle {
+    width: 55vw;
+  }
+  .middle .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5vh 0;
+    border-bottom: 1px solid lightgrey;
+  }
+  #cross {
+    opacity: .8;    
+  }
+  #cross :nth-child(1) {
+    transform: rotate(45deg);
+    height: 2px;
+    margin: 0 0 -2px 0;
+  }
+  #cross :nth-child(2) {
+    transform: rotate(-45deg);
+    height: 2px;
+    margin: 0;
+  }
+  .right {
+    background: darkred;
+    width: 1vw;
+  }
+
   </style>
-<!-- HEADER TEMPLATE -->
+<!-- MENU TEMPLATE -->
   <div id="hamburger">
     <div class="rectangle"></div>
     <div class="rectangle"></div>
     <div class="rectangle"></div>
   </div>
-  <div id="menu">
-    <div>radio</div>
-    <div>ici</div>
-    <div>et</div>
-    <div>maintenant</div>
-  </div>
+  <nav id="nav-bar">
+    <div class="left">
+      <div>LOGO</div>
+      <div>one</div>
+      <div>two</div>
+      <div>three</div>
+      <div>four</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="middle">
+      <div class="title">
+        <div>TITRE CATEGORIE</div>
+        <div id="cross">
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="right"></div>
+  </nav>
 `
 // 2. ATTACH SHADOW ROOT TO CLASS _________________________ */
 /**
  * <b>DESCR:</b><br>
- * My first custom Header made w/ web components
+ * My first menu w/ web components
  */
 export default class Menu extends HTMLElement {
   constructor() {
@@ -82,27 +118,25 @@ export default class Menu extends HTMLElement {
     // Attach the 'template' as defined above in a const variable
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     // Menu elements storage
-    this.one = this.shadowRoot.querySelector("#hamburger > div:nth-child(1)")
-    this.two = this.shadowRoot.querySelector("#hamburger > div:nth-child(2)")
-    this.three = this.shadowRoot.querySelector("#hamburger > div:nth-child(3)")
-    this.menu = this.shadowRoot.querySelector("#menu")
-    this.button = this.shadowRoot.querySelector("#hamburger")
-    
+    this.navBar = this.shadowRoot.querySelector("#nav-bar")
+    this.hamburger = this.shadowRoot.querySelector("#hamburger")
+    this.cross = this.shadowRoot.querySelector("#cross")
   }
-// CUSTOM METHODS
-hamburgerClick() {
-  this.button.addEventListener('click', () => {
-    this.one.classList.toggle("line-1")
-    this.two.classList.toggle("line-2")
-    this.three.classList.toggle("line-3")
-    this.menu.classList.toggle("slide-left")
-    this.button.classList.toggle("move-right")
-    document.querySelector("#smoke-screen").classList.toggle("z-index-reset")
-  })
-}
-// LIFECYCLE METHODS
+  // CUSTOM METHODS
+  hamburgerClick() {
+    this.hamburger.addEventListener('click', () => {
+      this.navBar.classList.toggle("active")
+    })
+  }
+  crossClick() {
+    this.cross.addEventListener('click', () => {
+      this.navBar.classList.toggle("active")
+    })
+  }
+  // LIFECYCLE METHODS
   connectedCallback() {
     this.hamburgerClick()
+    this.crossClick()
   }
 }
 
