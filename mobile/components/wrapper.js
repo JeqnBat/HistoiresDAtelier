@@ -1,6 +1,7 @@
 // 0. NESTED COMPONENT ____________________________________ */
 import Header from './header.js'
 import homeSection from './homeSection.js'
+import Stylisme from './stylisme.js'
 import Footer from './footer.js'
 
 // 1. CREATE TEMPLATE _____________________________________ */
@@ -11,12 +12,12 @@ template.innerHTML = `
     :host {
         display: flex;
         flex-direction: column;
-        padding: 2vw;
     }
     </style>
 <!-- TEMPLATE -->
     <header></header>
-    <section></section>
+    <main></main>
+    <footer></footer>
 `
 // 2. ATTACH SHADOW ROOT TO CLASS _________________________ */
 /**
@@ -30,18 +31,49 @@ export default class Wrapper extends HTMLElement {
         this.attachShadow({mode : 'open'})
         // Attach the 'template' as defined above in a const variable
         this.shadowRoot.appendChild(template.content.cloneNode(true))
-        this.attachComponents()
     }
     // CUSTOM METHODS
-    attachComponents() {
+    showData() {
+    }
+    /**
+     * <b>DESCR:</b><br>
+     * Returns the name of the page, stored as dataset attribute inside HTML tag
+     * 
+     * @method
+     * @returns {string} the current html page name
+     */
+    pageIs() {
+        return document.querySelector('html').dataset.pageName
+    }
+    /**
+     * <b>DESCR:</b><br>
+     * Attaches components to the wrapper
+     * 
+     * @method
+     * @param {string} toPage the page's name
+     */
+    attachComponents(toPage) {
         const header = document.createElement('header-m')
         this.shadowRoot.querySelector('header').appendChild(header)
 
-        const homeSection = document.createElement('home-section')
-        this.shadowRoot.querySelector('section').appendChild(homeSection)
+        switch(toPage) {
+            case 'index' :
+                const homeSection = document.createElement('home-section')
+                this.shadowRoot.querySelector('main').appendChild(homeSection)
+                break
+            case 'stylisme' :
+                const stylisme = document.createElement('stylisme-section')
+                this.shadowRoot.querySelector('main').appendChild(stylisme)
+                break
+        }
+
+        const footer = document.createElement('footer-m')
+        this.shadowRoot.querySelector('footer').appendChild(footer)
     }
     // LIFECYCLE METHODS
         connectedCallback() {
+            this.attachComponents(this.pageIs())
+            this.showData()
     }
 }
 

@@ -1,0 +1,7 @@
+{
+  "homeSections" : [
+    {"name" : "faire-parts", "href" : "faire-parts"},
+    {"name" : "stylisme", "href" : "stylisme"},
+    {"name" : "décoration", "href" : "decoration"}
+  ]
+}

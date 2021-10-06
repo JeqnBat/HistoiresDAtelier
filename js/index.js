@@ -1,7 +1,12 @@
-// IMPORTATOR _____________________________________________ */
-import Wrapper from './mobile/components/wrapper.js'
+// INDEX . JS = WHERE FRONT & BACK MEET
 
-// DETECT IF DEVICE IS MOBILE _____________________________ */
+// 1. IMPORTS _____________________________________________ */
+// Get FrontEnd
+import Wrapper from '../mobile/components/wrapper.js'
+// Get BackEnd
+import {getData} from './fetcher.js'
+
+// 2. DETECT IF DEVICE IS MOBILE __________________________ */
 /**
  * <b>DESCR:</b><br>
  * Checks if device has a touchscreen AND viewport width smaller
@@ -17,8 +22,7 @@ import Wrapper from './mobile/components/wrapper.js'
     }
     return Object.values(deviceParameters).every(Boolean)
 }
-
-// INSTANTIATE ELEMENTS INSIDE THE PARENT DOM _____________ */
+// 3. INSTANTIATE ELEMENTS INSIDE THE PARENT DOM __________ */
 /**
  * <b>DESCR:</b><br>
  * First function to be called once page is loaded.
@@ -27,11 +31,15 @@ import Wrapper from './mobile/components/wrapper.js'
  * 
  * @function
  */
-function init() {
-    const main = document.querySelector('main')
+(async function init() {
+    // Get Data first
+    data = await getData()
+
+    // Then start modules
+    const main = document.querySelector('body')
+
     if (deviceIsMobile()) {
-        const wrapper = document.createElement('wrapper-m')
-        const main = document.querySelector('main')
+        const wrapper = document.createElement('wrapper-m', Wrapper)
 
         wrapper.setAttribute('name', 'wrapper')
         main.appendChild(wrapper)
@@ -41,9 +49,7 @@ function init() {
 
         main.appendChild(msg)
     }
-}
+})()
 
-// CALL INIT ______________________________________________ */
-init()
-
-
+// 4. EXPORTS _____________________________________________ */
+export let data

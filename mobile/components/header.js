@@ -1,6 +1,7 @@
 // 0. NESTED COMPONENT ____________________________________ */
 import Menu from './menu.js'
-
+// 0. GET PAGE NAME TO DEFINE ROUTES ______________________ */
+let pageName = document.querySelector('html').dataset.pageName
 // 1. CREATE TEMPLATE _____________________________________ */
 const template = document.createElement('template')
 template.innerHTML = `
@@ -11,44 +12,56 @@ template.innerHTML = `
         display: flex;
         flex-direction: column;
     }
+    a, a:visited, a:hover, a:active {
+        text-decoration: none;
+        color: rgb(40, 42, 44);
+    }
     #lang {
-        margin-left: 10vw;
+        text-align: center;
+    }
+    #basket {
+        height: 25px;
+        width: 25px;
+        background: center / cover no-repeat url('./mobile/img/icons/basket.svg');
+    }
+    #header-menu {
+        position: fixed;
+        width: 93%;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgb(240, 239, 234);
     }
     #main-title {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    #social-icons {
-        margin: 0 auto;
-    }
-    .social-icon {
+        font-family: 'kallinsharegular';
         font-size: 2rem;
-        margin: 2px;
+        text-align: center;
+        margin-top: 25px;
     }
     #subtitle {
         text-align: center;
         line-height: 0;
     }
     .spacer {
-        height: 4vh;
+        height: 2vh;
     }
     </style>
 <!-- HEADER TEMPLATE -->
-    <div id="lang">FR | EN</div>
-    <div id="main-title">
-        <h1>HISTOIRES D'ATELIER</h1>
-        <div>P</div>
-        <div id="hamburger"></div>
+    <div id="header-menu">
+        <div id="lang">FR</div>
+        <div id="basket"></div>
+        <div id="hamburger-button"></div>
     </div>
-    <div id="social-icons">
-        <span class="social-icon">A</span>
-        <span class="social-icon">B</span>
-        <span class="social-icon">C</span>
+    <div id="main-title">
+        <a href="index.html">
+            <h1>Histoires d'atelier</h1>
+        </a>
     </div>
     <div id="subtitle">
-        <p>subtitle . kikoo</p>
+        <p>sous-titre . Atelier créatif</p>
     </div>
+
     <div class="spacer">
     </div>
 `
@@ -68,7 +81,7 @@ export default class Header extends HTMLElement {
     }
     attachMenu() {
         const menuM = document.createElement('menu-m')
-        this.shadowRoot.querySelector('#hamburger').appendChild(menuM)
+        this.shadowRoot.querySelector('#hamburger-button').appendChild(menuM)
     }
     // LIFECYCLE METHODS
     connectedCallback() {

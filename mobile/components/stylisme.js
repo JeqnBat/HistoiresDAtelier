@@ -3,24 +3,17 @@ const template = document.createElement('template')
 template.innerHTML = `
     <style>
 /* CSS ____________________________________________________ */
-    :host {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: black;
-        height: 200px;
-    }
+
     </style>
 <!-- HEADER TEMPLATE -->
-    <p> I AM A FOOTER </p>
-
+    <h2>STYLISME</h2>
 `
 // 2. ATTACH SHADOW ROOT TO CLASS _________________________ */
 /**
  * <b>DESCR:</b><br>
  * My first custom Header made w/ web components
  */
-export default class Footer extends HTMLElement {
+export default class Stylisme extends HTMLElement {
   constructor() {
     super()
     // Create SHADOW DOM w/ mode 'open' means I can access it via the 'shadowRoot' property of the HTML element
@@ -39,4 +32,4 @@ export default class Footer extends HTMLElement {
  * Argument 1 = nom du custom element
  * Argument 2 = nom de la classe
  */ 
-window.customElements.define('footer-m', Footer)
+window.customElements.define('stylisme-section', Stylisme)
