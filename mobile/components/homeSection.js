@@ -1,5 +1,3 @@
-// 0. IMPORT DATA _________________________________________ */
-import {data} from '../../js/index.js'
 // 1. CREATE TEMPLATE _____________________________________ */
 const template = document.createElement('template')
 template.innerHTML = `
@@ -22,15 +20,6 @@ template.innerHTML = `
         font-size: 2rem;
         text-transform: uppercase;
     }
-    .bg-stylisme {
-        background: center / cover no-repeat url("./mobile/img/home/stylisme.png");
-    }
-    .bg-décoration {
-        background: center / cover no-repeat url("./mobile/img/home/deco.jpg");
-    }
-    .bg-faire-parts {
-        background: center / cover no-repeat url("./mobile/img/home/faire-parts.jpg");
-    }
     </style>
 <!-- HEADER TEMPLATE -->
 `
@@ -46,20 +35,24 @@ export default class homeSection extends HTMLElement {
     this.attachShadow({mode : 'open'})
     // Attach the 'template' as defined above in a const variable
     this.shadowRoot.appendChild(template.content.cloneNode(true))
-    this.sections = data.homeSections
   }
 // CUSTOM METHODS
-  printPage(list) {
-    for(const element of list) {
+  printPage(categories) {
+    for(const element of categories) {
+      if(element.mobile.visible) {
         let section = document.createElement('section')
         section.innerHTML = `<h2><a href="${element.href}/index.html">${element.name}</a></h2>`
-        section.classList.add('section', `bg-${element.name}`)
+        section.classList.add('section')
+        section.style.background = `center / cover no-repeat url("${element.mobile.bg}")`
         this.shadowRoot.appendChild(section)
+      } else {
+        break
+      }
     }
   }
 // LIFECYCLE METHODS
   connectedCallback() {
-      this.printPage(this.sections)
+      this.printPage(data.categories)
   }
 }
 // 3. CREATE CUSTOM ELEMENT _______________________________ */

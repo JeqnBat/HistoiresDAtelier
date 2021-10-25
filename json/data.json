@@ -1,7 +1,68 @@
 {
-  "homeSections" : [
-    {"name" : "faire-parts", "href" : "faire-parts"},
-    {"name" : "stylisme", "href" : "stylisme"},
-    {"name" : "décoration", "href" : "decoration"}
-  ]
+  "categories" : [
+    {
+      "name"  : "faire-parts",
+      "href"  : "faire-parts",
+      "mobile"  : {
+        "visible" : true,
+        "bg"      : "./mobile/img/home/faire-parts.jpg"
+      },
+      "subCategories" : {
+          "mariage" : 1,
+          "naissance" : 2,
+          "anniversaire" : 3
+      }
+    },
+    {
+      "name"  : "stylisme - photo",
+      "href"  : "stylisme",
+      "mobile"  : {
+        "visible" : true,
+        "bg"      : "./mobile/img/home/stylisme.png"
+      },
+      "subCategories" : {
+          "a" : 1,
+          "b" : 2,
+          "c" : 3
+      }
+    },
+    {
+      "name"  : "décoration",
+      "href"  : "decoration",
+      "mobile"  : {
+        "visible" : true,
+        "bg"      : "./mobile/img/home/deco.jpg"
+      },
+      "subCategories" : {
+          "a" : 1,
+          "b" : 2,
+          "c" : 3
+      }
+    },
+    {
+      "name"  : "à propos",
+      "href"  : "a-propos",
+      "mobile"  : {
+        "visible" : false
+      }
+    },
+    {
+      "name"  : "contact",
+      "href"  : "contact",
+      "mobile"  : {
+        "visible" : false
+      }
+    }
+  ],
+  "icons" : {
+    "mail"      : "../svg/mailbox.svg",
+    "pin-map"   : "../svg/pin-map.svg",
+    "whatsapp"  : "../svg/whatsapp.svg",
+    "linkedin"  : "../svg/linkedin.svg"
+  },
+  "coordinates" : {
+    "address"   : "8 rue cyrano de bergerac",
+    "e-mail"    : "contact@histoiresdatelier.fr",
+    "whatsApp"  : "+33 6 55 44 22 11"
+  }
 }

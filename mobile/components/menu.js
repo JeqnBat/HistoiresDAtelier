@@ -78,25 +78,25 @@ template.innerHTML = `
   }
   .main-menu {
     list-style: none;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: rgb(40, 42, 44, .8);
   }
   .main-menu > li {
     line-height: 50px;
   }
-  .main-menu > li::before {
+  .has-sub-menu::before {
     position: absolute;
     right: 34px;
     font-family: 'arnoPro';
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: rgb(150, 152, 154);
     content: '+';
   }
-  .main-menu > li.minus::before {
+  .has-sub-menu.minus::before {
     position: absolute;
     right: 35px;
     font-family: 'arnoPro';
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: -1px;
     color: rgb(100, 102, 104);
@@ -108,9 +108,9 @@ template.innerHTML = `
     transition: max-height .5s ease-in-out;
   }
   .sub-menu > li {
-    line-height: 20px;
+    line-height: 25px;
     list-style: none;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: rgb(120, 122, 124);
     margin-left: -20px;
     padding-left: 0px;
@@ -133,45 +133,12 @@ template.innerHTML = `
         <div class="rectangle"></div>
       </div>
     </div>
-    <!-- CATEGORIES -->
-    <ul class="main-menu">
-      <li>faire-part
-        <ul class="sub-menu">
-            <li>a</li>
-            <li>b</li>
-            <li>c</li>
-        </ul>
-      </li>
-      <li>stylisme - photo
-        <ul class="sub-menu">
-          <li>a</li>
-          <li>b</li>
-          <li>c</li>
-        </ul>
-      </li>
-      <li>décoration
-        <ul class="sub-menu">
-          <li>a</li>
-          <li>b</li>
-          <li>c</li>
-        </ul>
-      </li>
-      <li>à propos
-        <ul class="sub-menu">
-          <li>a</li>
-          <li>b</li>
-          <li>c</li>
-        </ul>
-      </li>
-      <li>contact
-        <ul class="sub-menu">
-          <li>a</li>
-          <li>b</li>
-          <li>c</li>
-        </ul>
-      </li>
+    <!-- CONTACT INFOS -->
+    <ul style="position: absolute; bottom: 0; font-size: 1.25rem; list-style: none;">
+      <li>Histoires d'Atelier</li>
+      <li>0618372620</li>
+      <li>contact@histoiresdatelier.fr</li>
     </ul>
-    <p></p>
   </nav>
 `
 // 2. ATTACH SHADOW ROOT TO CLASS _________________________ */
@@ -203,22 +170,62 @@ export default class Menu extends HTMLElement {
     })
   }
   categoryClick() {
-    this.shadowRoot.addEventListener('click', (e) => {
-      if (e.target.tagName === 'LI' && e.target.parentNode.classList.value === "main-menu") {
-        let subMenu = e.target.firstElementChild
-        subMenu.classList.toggle('display')
-        e.target.classList.toggle('minus')
+    let mainMenu = this.shadowRoot.querySelector('.main-menu')
+    mainMenu.addEventListener('click', (e) => {
+      // Si la cible est la <li> ou un de ses enfants <span>, çàd s'il existe un sous-menu
+      if (e.target.classList.contains('has-sub-menu') || e.target.parentNode.classList.contains('has-sub-menu')) {
+        let list = e.target.closest('.has-sub-menu')
+        list.classList.toggle('minus')
+        list.lastChild.classList.toggle('display')
       } else {
         return
       }
     })
   }
-  
+  printMenu(categories) {
+    let menuWrapper = this.shadowRoot.querySelector('#nav-bar')
+    let menu = document.createElement('ul')
+    menu.classList.add('main-menu')
+
+    for(const element of categories) {
+      let category = document.createElement('li')
+      category.innerText = element.name
+      // Si la catégorie a une ou plusieurs sous-catégories
+      if(element.hasOwnProperty('subCategories')) {
+        // On crée un "+" à droite de la LI
+        category.classList.add('has-sub-menu')
+        // On crée le sous-menu
+        let subMenu = document.createElement('ul')
+        subMenu.classList.add('sub-menu')
+
+        for(const [key, value] of Object.entries(element.subCategories)) {
+          let subCategory = document.createElement('li')
+          subCategory.innerText = key
+          subMenu.appendChild(subCategory)
+        }
+        // On attache le sous-menu à la catégorie
+        category.appendChild(subMenu)
+      }
+      menu.appendChild(category)
+    }
+    menuWrapper.appendChild(menu)
+  }
+  printContact(data) {
+    let navBar = this.shadowRoot.querySelector('#nav-bar')
+    let contactBox = document.createElement('ul')
+    let line = document.createElement('li')
+    line.innerText = data.coordinates.address
+    contactBox.appendChild(line)
+    navBar.appendChild(contactBox)
+
+  }
   // LIFECYCLE METHODS
   connectedCallback() {
     this.hamburgerClick()
     this.crossClick()
+    this.printMenu(data.categories)
     this.categoryClick()
+    this.printContact(data)
   }
   disconnectedCallback() {
     this.hamburger.removeEventListener()

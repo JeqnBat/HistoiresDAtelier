@@ -33,8 +33,7 @@ import {getData} from './fetcher.js'
  */
 (async function init() {
     // Get Data first
-    data = await getData()
-
+    window.data = await getData()
     // Then start modules
     const main = document.querySelector('body')
 
@@ -50,6 +49,3 @@ import {getData} from './fetcher.js'
         main.appendChild(msg)
     }
 })()
-
-// 4. EXPORTS _____________________________________________ */
-export let data

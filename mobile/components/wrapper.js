@@ -33,8 +33,6 @@ export default class Wrapper extends HTMLElement {
         this.shadowRoot.appendChild(template.content.cloneNode(true))
     }
     // CUSTOM METHODS
-    showData() {
-    }
     /**
      * <b>DESCR:</b><br>
      * Returns the name of the page, stored as dataset attribute inside HTML tag
@@ -42,7 +40,7 @@ export default class Wrapper extends HTMLElement {
      * @method
      * @returns {string} the current html page name
      */
-    pageIs() {
+    page() {
         return document.querySelector('html').dataset.pageName
     }
     /**
@@ -50,13 +48,13 @@ export default class Wrapper extends HTMLElement {
      * Attaches components to the wrapper
      * 
      * @method
-     * @param {string} toPage the page's name
+     * @param {string} thisPage the page's name
      */
-    attachComponents(toPage) {
+    attachComponentsTo(thisPage) {
         const header = document.createElement('header-m')
         this.shadowRoot.querySelector('header').appendChild(header)
 
-        switch(toPage) {
+        switch(thisPage) {
             case 'index' :
                 const homeSection = document.createElement('home-section')
                 this.shadowRoot.querySelector('main').appendChild(homeSection)
@@ -72,8 +70,7 @@ export default class Wrapper extends HTMLElement {
     }
     // LIFECYCLE METHODS
         connectedCallback() {
-            this.attachComponents(this.pageIs())
-            this.showData()
+            this.attachComponentsTo(this.page())
     }
 }
 
