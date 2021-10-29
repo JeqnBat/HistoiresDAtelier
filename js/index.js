@@ -2,7 +2,7 @@
 
 // 1. IMPORTS _____________________________________________ */
 // Get FrontEnd
-import Wrapper from '../mobile/components/wrapper.js'
+import Wrapper from '../mobile/components/g_wrapper.js'
 // Get BackEnd
 import {getData} from './fetcher.js'
 
@@ -34,18 +34,17 @@ import {getData} from './fetcher.js'
 (async function init() {
     // Get Data first
     window.data = await getData()
+    // Store pageName in window so it is accessible everywhere by other modules
+    window.pageName = document.querySelector('html').dataset.pageName
     // Then start modules
     const main = document.querySelector('body')
 
     if (deviceIsMobile()) {
-        const wrapper = document.createElement('wrapper-m', Wrapper)
-
-        wrapper.setAttribute('name', 'wrapper')
-        main.appendChild(wrapper)
+        const pageBuilder = document.createElement('page-wrapper', Wrapper)
+        main.appendChild(pageBuilder)
     } else {
         const msg = document.createElement('p')
         msg.innerText = 'NOT A MOBILE VIEWPORT'
-
         main.appendChild(msg)
     }
 })()

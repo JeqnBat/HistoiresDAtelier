@@ -55,14 +55,14 @@
     }
   ],
   "icons" : {
-    "mail"      : "../svg/mailbox.svg",
-    "pin-map"   : "../svg/pin-map.svg",
-    "whatsapp"  : "../svg/whatsapp.svg",
-    "linkedin"  : "../svg/linkedin.svg"
+    "mail"      : "svg/mailbox.svg",
+    "pinMap"    : "svg/pin-map.svg",
+    "whatsApp"  : "svg/whatsapp.svg",
+    "linkedin"  : "svg/linkedin.svg"
   },
   "coordinates" : {
-    "address"   : "8 rue cyrano de bergerac",
-    "e-mail"    : "contact@histoiresdatelier.fr",
+    "address"   : "rue du comte de Tourville<br> 49100, ANGERS",
+    "mail"      : "contact@histoiresdatelier.fr",
     "whatsApp"  : "+33 6 55 44 22 11"
   }
 }
