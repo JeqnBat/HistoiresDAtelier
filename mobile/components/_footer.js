@@ -1,5 +1,3 @@
-// 0. GET PAGE NAME TO DEFINE ROUTES ______________________ */
-let pageName = document.querySelector('html').dataset.pageName
 // 1. CREATE TEMPLATE _____________________________________ */
 const template = document.createElement('template')
 template.innerHTML = `
@@ -28,20 +26,20 @@ template.innerHTML = `
       width: 35px;
     }
     .insta {
-      background: center / cover no-repeat url('./mobile/img/icons/instagram.svg');
+      background: center / cover no-repeat url('./svg/instagram.svg');
     }
     .facebook {
-      background: center / cover no-repeat url('./mobile/img/icons/facebook.svg');
+      background: center / cover no-repeat url('./svg/facebook.svg');
     }
     .pinterest {
-      background: center / cover no-repeat url('./mobile/img/icons/pinterest.svg');
+      background: center / cover no-repeat url('./svg/pinterest.svg');
     }
     #legal {
       font-size: 1rem;
       color: rgb(40, 42, 44);
     }
     </style>
-<!-- HEADER TEMPLATE -->
+<!-- FOOTER TEMPLATE -->
   <div id="social-icons">
     <div class="social-icon insta"></div>
     <div class="social-icon facebook"></div>

@@ -13,7 +13,6 @@ template.innerHTML = `
       display: flex;
       align-items: center;
       padding: 20px;
-      opacity: .7;
     }
     :host > div > img {
       padding-right: 5px;

@@ -3,15 +3,28 @@
     {
       "name"  : "faire-parts",
       "href"  : "faire-parts",
+      "descr" : "court texte de description",
       "mobile"  : {
         "visible" : true,
         "bg"      : "./mobile/img/home/faire-parts.jpg"
       },
-      "subCategories" : {
-          "mariage" : 1,
-          "naissance" : 2,
-          "anniversaire" : 3
-      }
+      "subCategories" : [
+        {
+          "name" : "mariage",
+          "descr" : "court texte de description faire-parts de mariage",
+          "bg" : "coral"
+        },
+        {
+          "name" : "naissance",
+          "descr" : "court texte de description faire-parts de naissance",
+          "bg" : "midnightblue"
+        },
+        {
+          "name" : "anniversaire",
+          "descr" : "court texte de description faire-parts d'anniversaire",
+          "bg" : "slategray"
+        }
+      ]
     },
     {
       "name"  : "stylisme - photo",

@@ -7,30 +7,21 @@ template.innerHTML = `
     text-decoration: none;
     color: inherit
   }
-  .section {
+  section {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 22vh;
     margin: 15px;
   }
-  .section > h2 {
+  section > h2 {
     background-color:  rgb(240, 239, 234, .3);
     padding: 15px;
     font-size: 2rem;
     text-transform: uppercase;
   }
   </style>
-<!-- HEADER TEMPLATE -->
-  <section class="section">
-    <h2><a href=""></a></h2>
-  </section>
-  <section class="section">
-    <h2><a href=""></a></h2>
-  </section>
-  <section class="section">
-    <h2><a href=""></a></h2>
-  </section>
+<!-- HOME SECTION TEMPLATE -->
 `
 // 2. ATTACH SHADOW ROOT TO CLASS _________________________ */
 /**
@@ -44,26 +35,30 @@ export default class HomeSection extends HTMLElement {
     this.attachShadow({mode : 'open'})
     // Attach the 'template' as defined above in a const variable
     this.shadowRoot.appendChild(template.content.cloneNode(true))
-    this.sections = this.shadowRoot.querySelectorAll('section')
-    this.links = this.shadowRoot.querySelectorAll('a')
+    this.categories = data.categories
   }
   // CUSTOM METHODS
-  printPage(categories) {
+  printComponent(categories) {
     // Use every to iterate through array (forEach can't use "break" instruction)
     // Here we return FALSE if element visibility is FALSE,
     // else we print the element's details onto the component
-    categories.every((element, index) => {
+    categories.every((element) => {
       if(!element.mobile.visible) {
         return false
       }
-      return this.links[index].setAttribute('href', element.href),
-        this.links[index].innerText = element.name,
-        this.sections[index].style.background = `center / cover no-repeat url("${element.mobile.bg}")`
+      let newSection = document.createElement('section')
+      newSection.innerHTML = `
+        <section>
+          <h2><a href="${element.href}">${element.name}</a></h2>
+        </section>`
+      newSection.style.background = `center / cover no-repeat url("${element.mobile.bg}")`
+
+      return this.shadowRoot.appendChild(newSection)
     })
   }
   // LIFECYCLE METHODS
   connectedCallback() {
-    this.printPage(data.categories)
+    this.printComponent(this.categories)
   }
 }
 // 3. CREATE CUSTOM ELEMENT _______________________________ */

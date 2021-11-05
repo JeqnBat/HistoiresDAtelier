@@ -1,48 +1,48 @@
 /**
  * AUTHOR   : JB
  * PROJECT  : Histoires d'atelier blue prints
- * DESCR    : Identify future website's components
+ * DESCR    : Global App's styles
  * TAGS     : CSS3 WEB COMPONENTS 
  */
 
 /* ==================== INDEX ====================
 
-    1. HTML & BODY
-    2. CUSTOM FONTS
+	1. HTML & BODY
+	2. CUSTOM FONTS
 
 */
 
 /* 1. HTML & BODY
 ________________________________________________________ */
 html, body {
-    background: rgb(240, 239, 234);
-    color: rgb(40, 42, 44);
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: monospace;
+	background: rgb(240, 239, 234);
+	color: rgb(40, 42, 44);
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: monospace;
+
 }
 
 /* 2. CUSTOM FONTS
 ________________________________________________________ */
 @font-face {
-    font-family: 'kallinsharegular';
-    src: url('fonts/kallinsha-webfont.woff2') format('woff2'),
-         url('fonts/kallinsha-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'kallinsharegular';
+	src: url('fonts/kallinsha-webfont.woff2') format('woff2'),
+				url('fonts/kallinsha-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 
 }
 @font-face {
-    font-family: 'ArnoPro';
-    src: url('fonts/ArnoPro-Regular.woff2') format('woff2'),
-        url('fonts/ArnoPro-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+	font-family: 'ArnoPro';
+	src: url('fonts/ArnoPro-Regular.woff2') format('woff2'),
+			url('fonts/ArnoPro-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
-
 /* 
-    background: rgb(240, 239, 234);
-    color: rgb(40, 42, 44);
+	background: rgb(240, 239, 234);
+	color: rgb(40, 42, 44);
 */

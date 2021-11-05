@@ -2,7 +2,7 @@
 
 // 1. IMPORTS _____________________________________________ */
 // Get FrontEnd
-import Wrapper from '../mobile/components/g_wrapper.js'
+import Wrapper from '../mobile/components/_wrapper.js'
 // Get BackEnd
 import {getData} from './fetcher.js'
 

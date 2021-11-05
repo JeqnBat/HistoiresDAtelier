@@ -24,7 +24,7 @@ template.innerHTML = `
       height: 2vh;
   }
   </style>
-<!-- HEADER TEMPLATE -->
+<!-- HOME HEADER TEMPLATE -->
   <div id="main-title">
     <a href="index.html">
         <h1>Histoires d'atelier</h1>

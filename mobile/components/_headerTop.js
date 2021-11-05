@@ -1,5 +1,5 @@
 // 0. NESTED COMPONENT ____________________________________ */
-import Menu from './g_menu.js'
+import Menu from './_menu.js'
 // 1. CREATE TEMPLATE _____________________________________ */
 const template = document.createElement('template')
 template.innerHTML = `
@@ -33,7 +33,7 @@ template.innerHTML = `
         background: rgb(240, 239, 234);
     }
     </style>
-<!-- HEADER TEMPLATE -->
+<!-- FOOTER TOP TEMPLATE -->
     <div id="header-menu">
         <div id="lang">FR</div>
         <div id="basket"></div>
