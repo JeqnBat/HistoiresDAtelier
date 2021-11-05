@@ -1,67 +1,119 @@
 {
   "categories" : [
     {
-      "name"  : "faire-parts",
+      "name"  : {
+        "en" : "invitations",
+        "fr" : "faire-parts"
+      },
       "href"  : "faire-parts",
-      "descr" : "court texte de description",
+      "descr" : {
+        "en" : "short text description",
+        "fr" : "court texte de description"
+      },
       "mobile"  : {
         "visible" : true,
         "bg"      : "./mobile/img/home/faire-parts.jpg"
       },
       "subCategories" : [
         {
-          "name" : "mariage",
-          "descr" : "court texte de description faire-parts de mariage",
+          "name" : {
+            "fr" : "mariage",
+            "en" : "wedding"
+          },
+          "descr" : {
+            "fr" : "short description text for wedding invitations",
+            "en" : "court texte de description faire-parts de mariage"
+          },
           "bg" : "coral"
         },
         {
-          "name" : "naissance",
-          "descr" : "court texte de description faire-parts de naissance",
+          "name" : {
+            "fr" : "naissance",
+            "en" : "birth"
+          },
+          "descr" : {
+            "fr" : "short description text for birth invitations",
+            "en" : "court texte de description faire-parts de naissance"
+          },
           "bg" : "midnightblue"
         },
         {
-          "name" : "anniversaire",
-          "descr" : "court texte de description faire-parts d'anniversaire",
+          "name" : {
+            "fr" : "anniversaire",
+            "en" : "birthday"
+          },
+          "descr" : {
+            "fr" : "short description text for birthday invitations",
+            "en" : "court texte de description faire-parts d'anniversaire"
+          },
           "bg" : "slategray"
         }
       ]
     },
     {
-      "name"  : "stylisme - photo",
+      "name"  : {
+        "en" : "styling - photo",
+        "fr" : "stylisme - photo"
+      },
       "href"  : "stylisme",
+      "descr" : {
+        "en" : "short text description",
+        "fr" : "court texte de description"
+      },
       "mobile"  : {
         "visible" : true,
         "bg"      : "./mobile/img/home/stylisme.png"
       },
       "subCategories" : {
-          "a" : 1,
-          "b" : 2,
-          "c" : 3
+        "a" : 1,
+        "b" : 2,
+        "c" : 3
       }
     },
     {
-      "name"  : "décoration",
+      "name"  : {
+        "en" : "decoration",
+        "fr" : "décoration"
+      },
       "href"  : "decoration",
+      "descr" : {
+        "en" : "short text description",
+        "fr" : "court texte de description"
+      },
       "mobile"  : {
         "visible" : true,
         "bg"      : "./mobile/img/home/deco.jpg"
       },
       "subCategories" : {
-          "a" : 1,
-          "b" : 2,
-          "c" : 3
+        "a" : 1,
+        "b" : 2,
+        "c" : 3
       }
     },
     {
-      "name"  : "à propos",
+      "name"  : {
+        "en" : "about",
+        "fr" : "à propos"
+      },
       "href"  : "a-propos",
+      "descr" : {
+        "en" : "short text description",
+        "fr" : "court texte de description"
+      },
       "mobile"  : {
         "visible" : false
       }
     },
     {
-      "name"  : "contact",
+      "name"  : {
+        "en" : "contact",
+        "fr" : "contact"
+      },
       "href"  : "contact",
+      "descr" : {
+        "en" : "short text description",
+        "fr" : "court texte de description"
+      },
       "mobile"  : {
         "visible" : false
       }

@@ -3,41 +3,41 @@ import Menu from './_menu.js'
 // 1. CREATE TEMPLATE _____________________________________ */
 const template = document.createElement('template')
 template.innerHTML = `
-    <style>
+	<style>
 /* CSS ____________________________________________________ */
-    :host {
-        min-height: 50px;
-        display: flex;
-        flex-direction: column;
-    }
-    a, a:visited, a:hover, a:active {
-        text-decoration: none;
-        color: rgb(40, 42, 44);
-    }
-    #lang {
-        text-align: center;
-        width: 36px;
-    }
-    #basket {
-        height: 25px;
-        width: 25px;
-        background: center / cover no-repeat url('./svg/basket.svg');
-    }
-    #header-menu {
-        position: fixed;
-        width: 93%;
-        padding: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgb(240, 239, 234);
-    }
-    </style>
+	:host {
+		min-height: 50px;
+		display: flex;
+		flex-direction: column;
+	}
+	a, a:visited, a:hover, a:active {
+		text-decoration: none;
+		color: rgb(40, 42, 44);
+	}
+	#lang {
+		text-align: center;
+		width: 36px;
+	}
+	#basket {
+		height: 25px;
+		width: 25px;
+		background: center / cover no-repeat url('./svg/basket.svg');
+	}
+	#header-menu {
+		position: fixed;
+		width: 93%;
+		padding: 15px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: rgb(240, 239, 234);
+	}
+	</style>
 <!-- FOOTER TOP TEMPLATE -->
-    <div id="header-menu">
-        <div id="lang">FR</div>
-        <div id="basket"></div>
-    </div>
+	<div id="header-menu">
+		<div id="lang">FR</div>
+		<div id="basket"></div>
+	</div>
 `
 // 2. ATTACH SHADOW ROOT TO CLASS _________________________ */
 /**

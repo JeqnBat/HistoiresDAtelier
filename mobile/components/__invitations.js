@@ -5,6 +5,10 @@ template.innerHTML = `
 /* CSS ____________________________________________________ */
   :host {
     text-align: center;
+    height: 390px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   a, a:visited, a:active, a:hover {
     text-decoration: none;
@@ -12,8 +16,7 @@ template.innerHTML = `
     font-size: 1.2rem;
     color: rgb(40, 42, 44);
   }
-  .faire-parts {
-    width: 100%;
+  .invitations {
     overflow: hidden;
   }
   #wrapper {
@@ -30,35 +33,43 @@ template.innerHTML = `
     justify-content: center;
     align-items: center;
     width: 87vw;
-    height: 300px;
+    min-height: 300px;
     background-color: midnightblue;
     transform: scale(.9);
     transition: transform .5s ease-in-out;
   }
+  span {
+    font-family: 'ArnoPro';
+    font-size: 2.5rem;
+  }
+  span::first-letter {
+    text-transform: uppercase;
+  }
   </style>
 <!-- FAIRE-PARTS TEMPLATE -->
-  <section class="faire-parts">
+  <section class="invitations">
     <div id="wrapper" style="transform: translateX(0);">
       <div class="category" data-name="mariage" style="transform: scale(1)">A</div>
       <div class="category" data-name="naissance">B</div>
       <div class="category" data-name="anniversaire">C</div>
     </div>
-    <span class="subtitle"></span>
   </section>
+  <span class="subtitle"></span>
+  <button>découvrir</button>
 `
 // 2. ATTACH SHADOW ROOT TO CLASS _________________________ */
 /**
  * <b>DESCR:</b><br>
  * My first custom Header made w/ web components
  */
-export default class FaireParts extends HTMLElement {
+export default class Invitations extends HTMLElement {
   constructor() {
     super()
     // Create SHADOW DOM w/ mode 'open' means I can access it via the 'shadowRoot' property of the HTML element
     this.attachShadow({mode : 'open'})
     // Attach the 'template' as defined above in a const variable
     this.shadowRoot.appendChild(template.content.cloneNode(true))
-    this.faireParts = data.categories[0]
+    this.invitations = data.categories[0]
     this.wrapper = this.shadowRoot.getElementById("wrapper")
     this.subtitle = this.shadowRoot.querySelector(".subtitle")
     // 2 variables used in custom methods below need to be in global component's scope
@@ -67,8 +78,9 @@ export default class FaireParts extends HTMLElement {
   }
 // CUSTOM METHODS
   printComponent() {
-    this.subtitle.innerText = this.faireParts.subCategories[0].name
+    this.subtitle.innerText = this.invitations.subCategories[0].name[lang]
   }
+// TOUCH START ____________________________________________ */
   /**
    * <b>DESCR:</b>
    * Swipe Method 1/4
@@ -76,13 +88,13 @@ export default class FaireParts extends HTMLElement {
    * 
    * @method
    */
-  // TOUCH START ____________________________________________ */
   touchStart() {
     this.wrapper.addEventListener('touchstart', (e) => {
       const firstTouch = e.touches[0]
       this.xDown = firstTouch.clientX
     }, false)
   }
+// TOUCH MOVE _____________________________________________ */
   /**
    * <b>DESCR:</b>
    * Swipe Method 2/4
@@ -92,7 +104,6 @@ export default class FaireParts extends HTMLElement {
    * @method
    * @returns {boolean} did user swipe right ?
    */
-  // TOUCH MOVE _____________________________________________ */
   touchMove() {
     this.wrapper.addEventListener('touchmove', (e) => {
       if (!this.xDown) {
@@ -110,6 +121,7 @@ export default class FaireParts extends HTMLElement {
       this.xDown = null
     }, false)
   }
+// SWIPE LOGIC ____________________________________________ */
   /**
    * <b>DESCR:</b>
    * Swipe Method 3/4
@@ -120,15 +132,16 @@ export default class FaireParts extends HTMLElement {
    * @param {string} vw translateX value in vw
    * @param {object} previousCat category moved away from viewport
    * @param {object} currentCat category moved inside viewport
+   * @param {number} index the index of the subCategory in DATA.JSON
    */
-  // SWIPE LOGIC ____________________________________________ */
-  swipeLogic(vw, previousCat, currentCat) {
+  swipeLogic(vw, previousCat, currentCat, index) {
     this.wrapper.style.setProperty('transform', `translateX(${vw})`)
     previousCat.style.setProperty('transform', 'scale(.9)')
     currentCat.style.setProperty('transform', 'scale(1)')
-    this.subtitle.innerText = currentCat.dataset.name
+    this.subtitle.innerText = this.invitations.subCategories[index].name[lang]
   }
-    /**
+// MAIN SECTION SWIPE _____________________________________ */
+  /**
    * <b>DESCR:</b>
    * Swipe Method 4/4
    * Detects if user swips left or right & where is the viewport
@@ -138,23 +151,22 @@ export default class FaireParts extends HTMLElement {
    * 
    * @method
    */
-  // MAIN SECTION SWIPE _____________________________________ */
   mainSectionSwipe() {
     this.wrapper.addEventListener('touchend', () => {
       let startingPoint = this.wrapper.style.getPropertyValue('transform')
       let [firstCategory, secondCategory, thirdCategory] = this.wrapper.getElementsByTagName("div")
-      // 1-0-0 => 0-1-0
+      // X x x => x X x
       if (this.swipeRight && startingPoint === 'translateX(0px)') {
-        this.swipeLogic('-86vw', firstCategory, secondCategory)
-      // 0-1-0 => 0-0-1
+        this.swipeLogic('-86vw', firstCategory, secondCategory, 1)
+      // x X x => x x X
       } else if (this.swipeRight && startingPoint === 'translateX(-86vw)') {
-        this.swipeLogic('-172vw', secondCategory, thirdCategory)
-      // 0-1-0 <= 0-0-1
+        this.swipeLogic('-172vw', secondCategory, thirdCategory, 2)
+      // x X x <= x x X
       } else if (!this.swipeRight && startingPoint === 'translateX(-172vw)') {
-        this.swipeLogic('-86vw', thirdCategory, secondCategory)
-      // 1-0-0 <= 0-1-0
+        this.swipeLogic('-86vw', thirdCategory, secondCategory, 1)
+      // X x x <= x X x
       } else if (!this.swipeRight && startingPoint === 'translateX(-86vw)') {
-        this.swipeLogic('0px', secondCategory, firstCategory)
+        this.swipeLogic('0px', secondCategory, firstCategory, 0)
       }
     }, false)
   }
@@ -174,4 +186,4 @@ export default class FaireParts extends HTMLElement {
  * Argument 1 = nom du custom element
  * Argument 2 = nom de la classe
  */ 
-window.customElements.define('faire-parts-section', FaireParts)
+window.customElements.define('faire-parts-section', Invitations)

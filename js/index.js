@@ -15,12 +15,12 @@ import {getData} from './fetcher.js'
  * @function
  * @returns {boolean} TRUE if the 2 parameters are valid
  */
- function deviceIsMobile() {
-    let deviceParameters = {
-        touchScreen: !!navigator.maxTouchPoints,
-        width: window.innerWidth < 500 ? true : false
-    }
-    return Object.values(deviceParameters).every(Boolean)
+function deviceIsMobile() {
+	let deviceParameters = {
+		touchScreen: !!navigator.maxTouchPoints,
+		width: window.innerWidth < 500 ? true : false
+	}
+	return Object.values(deviceParameters).every(Boolean)
 }
 // 3. INSTANTIATE ELEMENTS INSIDE THE PARENT DOM __________ */
 /**
@@ -32,19 +32,21 @@ import {getData} from './fetcher.js'
  * @function
  */
 (async function init() {
-    // Get Data first
-    window.data = await getData()
-    // Store pageName in window so it is accessible everywhere by other modules
-    window.pageName = document.querySelector('html').dataset.pageName
-    // Then start modules
-    const main = document.querySelector('body')
+	// Get Data first
+	window.data = await getData()
+	// Store page's language in global scope
+	window.lang = document.getElementsByTagName('html')[0].getAttribute('lang')
+	// Store pageName in window so it is accessible everywhere by other modules
+	window.pageName = document.querySelector('html').dataset.pageName
+	// Then start modules
+	const main = document.querySelector('body')
 
-    if (deviceIsMobile()) {
-        const pageBuilder = document.createElement('page-wrapper', Wrapper)
-        main.appendChild(pageBuilder)
-    } else {
-        const msg = document.createElement('p')
-        msg.innerText = 'NOT A MOBILE VIEWPORT'
-        main.appendChild(msg)
-    }
+	if (deviceIsMobile()) {
+		const pageBuilder = document.createElement('page-wrapper', Wrapper)
+		main.appendChild(pageBuilder)
+	} else {
+		const msg = document.createElement('p')
+		msg.innerText = 'NOT A MOBILE VIEWPORT'
+		main.appendChild(msg)
+	}
 })()

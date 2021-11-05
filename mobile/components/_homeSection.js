@@ -49,7 +49,7 @@ export default class HomeSection extends HTMLElement {
       let newSection = document.createElement('section')
       newSection.innerHTML = `
         <section>
-          <h2><a href="${element.href}">${element.name}</a></h2>
+          <h2><a href="${element.href}">${element.name[lang]}</a></h2>
         </section>`
       newSection.style.background = `center / cover no-repeat url("${element.mobile.bg}")`
 

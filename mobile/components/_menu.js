@@ -23,7 +23,6 @@ template.innerHTML = `
     width: 100vw;
     height: 100vh;
     position: fixed;
-    z-index: 1;
     top: 0;
     left: -100vw;
     text-transform: uppercase;
@@ -150,6 +149,8 @@ template.innerHTML = `
 /**
  * <b>DESCR:</b><br>
  * My first menu w/ web components
+ * 
+ * @method
  */
 export default class Menu extends HTMLElement {
   constructor() {
@@ -164,6 +165,14 @@ export default class Menu extends HTMLElement {
     this.cross = this.shadowRoot.querySelector('#cross')
   }
   // CUSTOM METHODS
+// HAMBURGER & CROSS CLICK ________________________________ */
+  /**
+   * <b>DESCR:</b>
+   * Event listeners linked to hamburger icon top right of the viewport
+   * and cross right next to "MENU"
+   *
+   * @method
+   */
   hamburgerClick() {
     this.hamburger.addEventListener('click', () => {
       this.navBar.classList.toggle('active')
@@ -174,10 +183,17 @@ export default class Menu extends HTMLElement {
       this.navBar.classList.toggle('active')
     })
   }
+// CATEGORY CLICK _________________________________________ */
+  /**
+   * <b>DESCR:</b>
+   * Event listeners triggered when clicking on one of the menu's categories
+   * 
+   * @method
+   */
   categoryClick() {
     let mainMenu = this.shadowRoot.querySelector('.main-menu')
     mainMenu.addEventListener('click', (e) => {
-      // Si la cible est la <li> ou un de ses enfants <span>, çàd s'il existe un sous-menu
+      // if a sub menu exists
       if (e.target.classList.contains('has-sub-menu') || e.target.parentNode.classList.contains('has-sub-menu')) {
         let list = e.target.closest('.has-sub-menu')
         list.classList.toggle('minus')
@@ -187,18 +203,23 @@ export default class Menu extends HTMLElement {
       }
     })
   }
+// CATEGORY CLICK _________________________________________ */
+  /**
+   * <b>DESCR:</b>
+   * Renders the actual menu in the navigation bar
+   * 
+   * @method
+   * @param {object} categories get categories names & subcategories from JSON file
+   */
   printMenu(categories) {
     let menu = document.createElement('ul')
     menu.classList.add('main-menu')
 
     for(const element of categories) {
       let category = document.createElement('li')
-      category.innerText = element.name
-      // Si la catégorie a une ou plusieurs sous-catégories
+      category.innerText = element.name[lang]
       if(element.hasOwnProperty('subCategories')) {
-        // On crée un "+" à droite de la LI
         category.classList.add('has-sub-menu')
-        // On crée le sous-menu
         let subMenu = document.createElement('ul')
         subMenu.classList.add('sub-menu')
 
@@ -214,6 +235,14 @@ export default class Menu extends HTMLElement {
     }
     this.navBar.appendChild(menu)
   }
+// PRINT CONTACT __________________________________________ */
+  /**
+   * <b>DESCR:</b>
+   * Renders contact box inside main nav
+   * 
+   * @method
+   * @param {object} data get contact infos from JSON file
+   */
   printContact(data) {
     let contactBox = document.createElement('section')
     contactBox.setAttribute('id', 'contact-box')

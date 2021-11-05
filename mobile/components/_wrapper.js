@@ -4,8 +4,8 @@ import HeaderTitle from './_homeHeader.js'
 import HomeSection from './_homeSection.js'
 import Footer from './_footer.js'
 import Decoration from './__decoration.js'
-import FaireParts from './__faireParts.js'
-import Stylisme from './__stylisme.js'
+import FaireParts from './__invitations.js'
+import Stylisme from './__styling.js'
 import SectionHeader from './__header.js'
 import BreadScrum from './__breadScrum.js'
 
@@ -27,7 +27,13 @@ template.innerHTML = `
 	@keyframes fadeIn {
 		0% { opacity: 0; }
 		100% { opacity: 1; }
-	}   
+	}
+	header {
+		z-index: 10;
+	}
+	main {
+		z-index: 0;
+	}
 	</style>
 <!-- WRAPPER TEMPLATE -->
 	<header></header>
